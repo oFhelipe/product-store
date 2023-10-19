@@ -2,21 +2,13 @@ import React from 'react';
 import * as S from './styles';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {formatNumberToCurrency} from '../../utils/formatNumberToCurrency';
+import {IProduct} from '../../interfaces/IProduct';
+import {useFavorites} from '../../context/FavoritesProvider';
 
-type ProductCardProps = {
-  product?: {
-    id: number;
-    title: string;
-    price: number;
-    description: string;
-    category: string;
-    image: string;
-    rating: {
-      rate: number;
-      count: number;
-    };
-  };
-};
+interface ProductCardProps {
+  product?: IProduct;
+}
+
 const defaultProduct = {
   id: 2,
   title: 'Mens Casual Premium Slim Fit T-Shirts ',
@@ -33,10 +25,20 @@ const defaultProduct = {
 };
 
 export const ProductCard = ({product = defaultProduct}: ProductCardProps) => {
+  const {ids, favoriteProduct, unFavoriteProduct} = useFavorites();
+
+  const isFavorite = ids.includes(product.id);
+  const favoriteIconName = isFavorite ? 'heart' : 'hearto';
+  const iconColor = isFavorite ? '#8838E1' : '#CCCCCC';
+
+  const onClickFavorite = isFavorite
+    ? () => unFavoriteProduct(product.id)
+    : () => favoriteProduct(product.id);
+
   return (
     <S.ProductCardContainer>
-      <S.FavoriteButton>
-        <Icon name="hearto" size={24} color="#CCC" />
+      <S.FavoriteButton onPress={onClickFavorite}>
+        <Icon name={favoriteIconName} size={24} color={iconColor} />
       </S.FavoriteButton>
       <S.Image
         source={{
