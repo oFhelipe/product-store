@@ -1,11 +1,11 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import * as S from './styles';
 import {ProductCard} from '../../components/ProductCard';
 
 export const Products = () => {
   return (
-    <View>
+    <S.ProductsContainer>
       <ProductCard />
-    </View>
+    </S.ProductsContainer>
   );
 };

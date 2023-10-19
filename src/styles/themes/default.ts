@@ -2,7 +2,7 @@ import {ITheme} from './ITheme';
 
 export const defaultTheme: ITheme = {
   border: '#CCCCCC',
-  background: '#FAFAFA',
+  background: '#FFFFFF',
   text: '#313131',
   white: '#FFFFFF',
 

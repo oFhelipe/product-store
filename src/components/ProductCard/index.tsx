@@ -1,5 +1,7 @@
 import React from 'react';
 import * as S from './styles';
+import Icon from 'react-native-vector-icons/AntDesign';
+import {formatNumberToCurrency} from '../../utils/formatNumberToCurrency';
 
 type ProductCardProps = {
   product?: {
@@ -33,16 +35,28 @@ const defaultProduct = {
 export const ProductCard = ({product = defaultProduct}: ProductCardProps) => {
   return (
     <S.ProductCardContainer>
+      <S.FavoriteButton>
+        <Icon name="hearto" size={24} color="#CCC" />
+      </S.FavoriteButton>
       <S.Image
         source={{
           uri: product.image,
         }}
       />
-      <S.Title>{product.title}</S.Title>
-      <S.BottomContainer>
-        <S.Price>{product.price}</S.Price>
-        <S.AddButton />
-      </S.BottomContainer>
+      <S.InfoContainer>
+        <S.RateContainer>
+          <S.RateValue>{product.rating.rate}</S.RateValue>
+          <Icon name="star" size={14} color="#FFB627" />
+          <S.RateQuantity>({product.rating.count})</S.RateQuantity>
+        </S.RateContainer>
+        <S.Title>{product.title}</S.Title>
+        <S.BottomContainer>
+          <S.Price>{formatNumberToCurrency(product.price)}</S.Price>
+          <S.AddButton>
+            <Icon name="plus" size={16} color="#FFFFFF" />
+          </S.AddButton>
+        </S.BottomContainer>
+      </S.InfoContainer>
     </S.ProductCardContainer>
   );
 };
