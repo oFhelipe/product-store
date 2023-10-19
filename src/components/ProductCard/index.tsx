@@ -3,7 +3,7 @@ import * as S from './styles';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {formatNumberToCurrency} from '../../utils/formatNumberToCurrency';
 import {IProduct} from '../../interfaces/IProduct';
-import {useFavorites} from '../../context/FavoritesProvider';
+import {useFavorites} from '../../contexts/FavoritesProvider';
 
 interface ProductCardProps {
   product?: IProduct;
@@ -51,7 +51,9 @@ export const ProductCard = ({product = defaultProduct}: ProductCardProps) => {
           <Icon name="star" size={14} color="#FFB627" />
           <S.RateQuantity>({product.rating.count})</S.RateQuantity>
         </S.RateContainer>
-        <S.Title>{product.title}</S.Title>
+        <S.Title numberOfLines={2} ellipsizeMode="tail">
+          {product.title}
+        </S.Title>
         <S.BottomContainer>
           <S.Price>{formatNumberToCurrency(product.price)}</S.Price>
           <S.AddButton>

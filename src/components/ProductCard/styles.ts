@@ -5,13 +5,14 @@ import {Dimensions} from 'react-native';
 const {width} = Dimensions.get('screen');
 
 export const ProductCardContainer = styled.TouchableOpacity`
-  width: ${width / 2 - 32}px;
+  width: ${width / 2 - 20}px;
   height: 300px;
   border: solid 1px ${props => props.theme.border};
   border-radius: 10px;
-  padding: 24px 8px 16px 8px;
+  padding: 24px 16px 16px 16px;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 16px;
 `;
 
 export const Image = styled.Image`
@@ -31,7 +32,9 @@ export const FavoriteButton = styled.TouchableOpacity`
   justify-content: center;
 `;
 
-export const InfoContainer = styled.View``;
+export const InfoContainer = styled.View`
+  width: 100%;
+`;
 
 export const Title = styled.Text`
   font-weight: 700;
