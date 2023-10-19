@@ -4,7 +4,10 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import {formatNumberToCurrency} from '../../utils/formatNumberToCurrency';
 import {IProduct} from '../../interfaces/IProduct';
 import {useFavorites} from '../../contexts/FavoritesProvider';
-
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {ProductsStackParamList} from '../../routes/ProductsRoutes';
+import {Rating} from '../Rating';
 interface ProductCardProps {
   product?: IProduct;
 }
@@ -25,19 +28,25 @@ const defaultProduct = {
 };
 
 export const ProductCard = ({product = defaultProduct}: ProductCardProps) => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<ProductsStackParamList>>();
   const {ids, favoriteProduct, unFavoriteProduct} = useFavorites();
 
   const isFavorite = ids.includes(product.id);
   const favoriteIconName = isFavorite ? 'heart' : 'hearto';
   const iconColor = isFavorite ? '#8838E1' : '#CCCCCC';
 
-  const onClickFavorite = isFavorite
+  const onPressFavorite = isFavorite
     ? () => unFavoriteProduct(product.id)
     : () => favoriteProduct(product.id);
 
+  const onPressCard = () => {
+    navigation.navigate('ProductDetail', {id: product.id});
+  };
+
   return (
-    <S.ProductCardContainer>
-      <S.FavoriteButton onPress={onClickFavorite}>
+    <S.ProductCardContainer onPress={onPressCard}>
+      <S.FavoriteButton onPress={onPressFavorite}>
         <Icon name={favoriteIconName} size={24} color={iconColor} />
       </S.FavoriteButton>
       <S.Image
@@ -46,11 +55,7 @@ export const ProductCard = ({product = defaultProduct}: ProductCardProps) => {
         }}
       />
       <S.InfoContainer>
-        <S.RateContainer>
-          <S.RateValue>{product.rating.rate}</S.RateValue>
-          <Icon name="star" size={14} color="#FFB627" />
-          <S.RateQuantity>({product.rating.count})</S.RateQuantity>
-        </S.RateContainer>
+        <Rating count={product.rating.count} rate={product.rating.rate} />
         <S.Title numberOfLines={2} ellipsizeMode="tail">
           {product.title}
         </S.Title>

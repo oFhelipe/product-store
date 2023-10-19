@@ -62,20 +62,3 @@ export const AddButton = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
 `;
-
-export const RateContainer = styled.View`
-  align-self: flex-end;
-  flex-direction: row;
-  align-items: center;
-`;
-
-export const RateValue = styled.Text`
-  color: ${props => props.theme.text};
-  font-size: 14px;
-`;
-
-export const RateQuantity = styled.Text`
-  color: ${props => props.theme.text};
-  font-size: 11px;
-  font-weight: 300;
-`;
