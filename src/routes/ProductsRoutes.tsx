@@ -1,8 +1,16 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Products} from '../screens/Products';
+import {Products} from '../screens/ProductsList';
+import {ProductDetail} from '../screens/ProductDetail';
 
-const Stack = createNativeStackNavigator();
+export type ProductsStackParamList = {
+  Products: undefined;
+  ProductDetail: {
+    id: number;
+  };
+};
+
+const Stack = createNativeStackNavigator<ProductsStackParamList>();
 
 export function ProductsRoutes() {
   return (
@@ -11,6 +19,7 @@ export function ProductsRoutes() {
         headerShown: false,
       }}>
       <Stack.Screen name="Products" component={Products} />
+      <Stack.Screen name="ProductDetail" component={ProductDetail} />
     </Stack.Navigator>
   );
 }
