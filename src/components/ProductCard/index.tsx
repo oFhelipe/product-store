@@ -8,6 +8,7 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {ProductsStackParamList} from '../../routes/ProductsRoutes';
 import {Rating} from '../Rating';
+import {useTheme} from 'styled-components/native';
 interface ProductCardProps {
   product?: IProduct;
 }
@@ -28,13 +29,14 @@ const defaultProduct = {
 };
 
 export const ProductCard = ({product = defaultProduct}: ProductCardProps) => {
+  const theme = useTheme();
   const navigation =
     useNavigation<NativeStackNavigationProp<ProductsStackParamList>>();
   const {ids, favoriteProduct, unFavoriteProduct} = useFavorites();
 
   const isFavorite = ids.includes(product.id);
   const favoriteIconName = isFavorite ? 'heart' : 'hearto';
-  const iconColor = isFavorite ? '#8838E1' : '#CCCCCC';
+  const iconColor = isFavorite ? theme.primary : theme.border;
 
   const onPressFavorite = isFavorite
     ? () => unFavoriteProduct(product.id)
@@ -62,7 +64,7 @@ export const ProductCard = ({product = defaultProduct}: ProductCardProps) => {
         <S.BottomContainer>
           <S.Price>{formatNumberToCurrency(product.price)}</S.Price>
           <S.AddButton>
-            <Icon name="plus" size={16} color="#FFFFFF" />
+            <Icon name="plus" size={16} color={theme.white} />
           </S.AddButton>
         </S.BottomContainer>
       </S.InfoContainer>
