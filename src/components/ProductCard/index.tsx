@@ -10,25 +10,10 @@ import {ProductsStackParamList} from '../../routes/ProductsRoutes';
 import {Rating} from '../Rating';
 import {useTheme} from 'styled-components/native';
 interface ProductCardProps {
-  product?: IProduct;
+  product: IProduct;
 }
 
-const defaultProduct = {
-  id: 2,
-  title: 'Mens Casual Premium Slim Fit T-Shirts ',
-  price: 22.3,
-  description:
-    'Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.',
-  category: "men's clothing",
-  image:
-    'https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg',
-  rating: {
-    rate: 4.1,
-    count: 259,
-  },
-};
-
-export const ProductCard = ({product = defaultProduct}: ProductCardProps) => {
+export const ProductCard = ({product}: ProductCardProps) => {
   const theme = useTheme();
   const navigation =
     useNavigation<NativeStackNavigationProp<ProductsStackParamList>>();
@@ -38,17 +23,17 @@ export const ProductCard = ({product = defaultProduct}: ProductCardProps) => {
   const favoriteIconName = isFavorite ? 'heart' : 'hearto';
   const iconColor = isFavorite ? theme.primary : theme.border;
 
-  const onPressFavorite = isFavorite
+  const handleOnPressFavorite = isFavorite
     ? () => unFavoriteProduct(product.id)
     : () => favoriteProduct(product.id);
 
-  const onPressCard = () => {
+  const handleOnPressCard = () => {
     navigation.navigate('ProductDetail', {id: product.id});
   };
 
   return (
-    <S.ProductCardContainer onPress={onPressCard}>
-      <S.FavoriteButton onPress={onPressFavorite}>
+    <S.ProductCardContainer onPress={handleOnPressCard}>
+      <S.FavoriteButton onPress={handleOnPressFavorite}>
         <Icon name={favoriteIconName} size={24} color={iconColor} />
       </S.FavoriteButton>
       <S.Image
@@ -61,12 +46,7 @@ export const ProductCard = ({product = defaultProduct}: ProductCardProps) => {
         <S.Title numberOfLines={2} ellipsizeMode="tail">
           {product.title}
         </S.Title>
-        <S.BottomContainer>
-          <S.Price>{formatNumberToCurrency(product.price)}</S.Price>
-          <S.AddButton>
-            <Icon name="plus" size={16} color={theme.white} />
-          </S.AddButton>
-        </S.BottomContainer>
+        <S.Price>{formatNumberToCurrency(product.price)}</S.Price>
       </S.InfoContainer>
     </S.ProductCardContainer>
   );

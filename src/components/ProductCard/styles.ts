@@ -43,22 +43,8 @@ export const Title = styled.Text`
   margin-bottom: 2px;
 `;
 
-export const BottomContainer = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
 export const Price = styled.Text`
   font-weight: 700;
   color: ${props => props.theme.text};
   font-size: 20px;
-`;
-
-export const AddButton = styled.TouchableOpacity`
-  height: 32px;
-  width: 32px;
-  border-radius: 10px;
-  background-color: ${props => props.theme.primary};
-  align-items: center;
-  justify-content: center;
 `;

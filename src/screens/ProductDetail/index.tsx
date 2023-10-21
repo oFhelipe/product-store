@@ -3,8 +3,6 @@ import * as S from './styles';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {ProductsStackParamList} from '../../routes/ProductsRoutes';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import ProductService from '../../services/ProductService';
 import {IProduct} from '../../interfaces/IProduct';
 import {Rating} from '../../components/Rating';
@@ -12,20 +10,24 @@ import {formatNumberToCurrency} from '../../utils/formatNumberToCurrency';
 import {Button} from '../../components/Button';
 import {useCart} from '../../contexts/CartProvider';
 import {useTheme} from 'styled-components/native';
+import {IncrementDecrement} from '../../components/IncrementDecrement';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {CartStackParamList} from '../../routes/CartRoutes';
 
 export function ProductDetail() {
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<CartStackParamList>>();
 
   const route = useRoute<RouteProp<ProductsStackParamList, 'ProductDetail'>>();
   const {id} = route.params;
 
-  const {cartProducts, incrementProductInCart, decrementProductInCart} =
+  const {cartProducts, incrementProduct, decrementProduct, addProduct} =
     useCart();
   const theme = useTheme();
 
   const [product, setProduct] = useState<IProduct | null>(null);
 
-  const productCartQuantity =
+  const cartProductQuantity =
     cartProducts.find(cartProduct => cartProduct.id === product?.id)
       ?.quantity ?? 0;
 
@@ -33,19 +35,24 @@ export function ProductDetail() {
     navigation.goBack();
   };
 
-  const addToCart = useCallback(() => {
-    incrementProductInCart(product!);
-  }, [product, incrementProductInCart]);
+  const handleAddToCart = useCallback(() => {
+    addProduct(product!);
+  }, [product, addProduct]);
 
-  const removeFromCart = useCallback(() => {
-    decrementProductInCart(product!.id);
-  }, [product, decrementProductInCart]);
+  const handleIncrement = useCallback(() => {
+    incrementProduct(product!.id);
+  }, [product, incrementProduct]);
+
+  const handleDecrement = useCallback(() => {
+    decrementProduct(product!.id);
+  }, [product, decrementProduct]);
 
   const onFinish = useCallback(() => {
-    if (productCartQuantity > 0) {
-      addToCart();
+    if (cartProductQuantity === 0) {
+      handleAddToCart();
     }
-  }, [addToCart, productCartQuantity]);
+    navigation.navigate('Cart');
+  }, [handleAddToCart, cartProductQuantity, navigation]);
 
   useEffect(() => {
     if (id) {
@@ -91,59 +98,22 @@ export function ProductDetail() {
             </S.ProductInfoContainer>
           </S.ProductInfoScroll>
           <S.ActionsContainer>
-            {productCartQuantity > 0 ? (
-              <S.AddSubtractContainer>
-                <Button
-                  onPress={removeFromCart}
-                  icon={
-                    productCartQuantity === 1 ? (
-                      <FontAwesome
-                        name="trash"
-                        color={theme['primary-dark']}
-                        size={24}
-                      />
-                    ) : (
-                      <AntDesign
-                        name="minus"
-                        color={theme['primary-dark']}
-                        size={24}
-                      />
-                    )
-                  }
-                  variant="secondary"
-                  size="large"
-                />
-                <S.CountContainer>
-                  <Ionicons
-                    name="cart"
-                    color={theme['primary-dark']}
-                    size={28}
-                  />
-                  <S.CountLabel>{productCartQuantity}</S.CountLabel>
-                </S.CountContainer>
-                <Button
-                  onPress={addToCart}
-                  icon={
-                    <AntDesign
-                      name="plus"
-                      color={theme['primary-dark']}
-                      size={24}
-                    />
-                  }
-                  variant="secondary"
-                  size="large"
-                />
-              </S.AddSubtractContainer>
+            {cartProductQuantity > 0 ? (
+              <IncrementDecrement
+                onPressDecrement={handleDecrement}
+                onPressIncrement={handleIncrement}
+                quantity={cartProductQuantity}
+              />
             ) : (
               <Button
-                onPress={addToCart}
+                onPress={handleAddToCart}
                 label="Adicionar no carrinho"
                 variant="secondary"
               />
             )}
             <Button
               onPress={onFinish}
-              label={productCartQuantity > 0 ? 'Finalizar compra' : 'Comprar'}
+              label={cartProductQuantity > 0 ? 'Finalizar compra' : 'Comprar'}
               size="large"
             />
           </S.ActionsContainer>

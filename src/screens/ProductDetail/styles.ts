@@ -66,21 +66,3 @@ export const ActionsContainer = styled.View`
   gap: 8px;
   padding-top: 8px;
 `;
-
-export const AddSubtractContainer = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-export const CountContainer = styled.View`
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  gap: 8px;
-`;
-
-export const CountLabel = styled.Text`
-  color: ${props => props.theme.text};
-  font-size: 32px;
-  font-weight: bold;
-`;
