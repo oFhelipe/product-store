@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react';
+import React from 'react';
 import {TouchableOpacityProps} from 'react-native';
 import * as S from './styles';
 
@@ -7,21 +7,25 @@ export type ButtonSizes = 'small' | 'medium' | 'large';
 
 interface ButtonProps extends TouchableOpacityProps {
   label?: string;
-  icon?: ReactNode;
+  icon?: JSX.Element;
   variant?: ButtonVariants;
   size?: ButtonSizes;
 }
 
 export function Button({
   variant = 'primary',
-  icon,
+  icon: Icon,
   label,
   size = 'medium',
   ...buttonProps
 }: ButtonProps) {
   return (
-    <S.ButtonContainer {...buttonProps} variant={variant} size={size}>
-      {icon}
+    <S.ButtonContainer
+      testID="button"
+      {...buttonProps}
+      variant={variant}
+      size={size}>
+      {Icon}
       {label && (
         <S.Label variant={variant} size={size}>
           {label}
