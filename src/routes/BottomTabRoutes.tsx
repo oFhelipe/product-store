@@ -2,10 +2,12 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {ProductsRoutes} from './ProductsRoutes';
 import {FavoritesRoutes} from './FavoritesRoutes';
+import {CartRoutes} from './CartRoutes';
 
 export type BottomTabParamList = {
   ProductsTab: undefined;
   FavoritesTab: undefined;
+  CartTab: undefined;
 };
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
@@ -25,10 +27,17 @@ export function BottomTabRoutes() {
       />
       <Tab.Screen
         options={{
-          title: 'Favorites',
+          title: 'Favoritos',
         }}
         name="FavoritesTab"
         component={FavoritesRoutes}
+      />
+      <Tab.Screen
+        options={{
+          title: 'Carrinho',
+        }}
+        name="CartTab"
+        component={CartRoutes}
       />
     </Tab.Navigator>
   );
