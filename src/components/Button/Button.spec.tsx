@@ -10,7 +10,7 @@ describe('Component <Button />', () => {
   it('should render with label', () => {
     renderWithProviders(<Button label="Label" />);
     const title = screen.getByText('Label');
-    expect(title).toBeTruthy();
+    expect(title).toBeOnTheScreen();
   });
 
   it('should render with icon', () => {
@@ -18,7 +18,7 @@ describe('Component <Button />', () => {
       <Button icon={<AntDesign testID="icone" name="plus" />} />,
     );
     const icon = screen.getByTestId('icone');
-    expect(icon).toBeTruthy();
+    expect(icon).toBeOnTheScreen();
   });
 
   it('should render with label and icon', () => {
@@ -26,10 +26,10 @@ describe('Component <Button />', () => {
       <Button label="Label" icon={<AntDesign testID="icone" name="plus" />} />,
     );
     const icon = screen.getByTestId('icone');
-    expect(icon).toBeTruthy();
+    expect(icon).toBeOnTheScreen();
 
     const title = screen.getByText('Label');
-    expect(title).toBeTruthy();
+    expect(title).toBeOnTheScreen();
   });
 
   it('should exec function on press', async () => {

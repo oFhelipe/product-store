@@ -8,6 +8,6 @@ describe('Component <App />', () => {
   it('should render', () => {
     render(<App />);
     const title = screen.getByText('Descubra o seu produto favorito');
-    expect(title).toBeTruthy();
+    expect(title).toBeOnTheScreen();
   });
 });
