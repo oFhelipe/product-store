@@ -33,10 +33,18 @@ export const ProductCard = ({product}: ProductCardProps) => {
 
   return (
     <S.ProductCardContainer onPress={handleOnPressCard}>
-      <S.FavoriteButton onPress={handleOnPressFavorite}>
-        <Icon name={favoriteIconName} size={24} color={iconColor} />
+      <S.FavoriteButton
+        testID="favorite-button"
+        onPress={handleOnPressFavorite}>
+        <Icon
+          testID="favorite-icon"
+          name={favoriteIconName}
+          size={24}
+          color={iconColor}
+        />
       </S.FavoriteButton>
       <S.Image
+        testID="product-image"
         source={{
           uri: product.image,
         }}
