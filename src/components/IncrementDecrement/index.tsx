@@ -28,6 +28,7 @@ export function IncrementDecrement({
   return (
     <S.IncrementDecrementContainer>
       <Button
+        testID="decrement-button"
         onPress={onPressDecrement}
         icon={
           quantity === 1 ? (
@@ -56,6 +57,7 @@ export function IncrementDecrement({
         <S.CountLabel size={size}>{quantity}</S.CountLabel>
       </S.CountContainer>
       <Button
+        testID="increment-button"
         onPress={onPressIncrement}
         icon={
           <AntDesign
