@@ -32,6 +32,7 @@ export function CartProductCard({product}: CartProductCardProps) {
   return (
     <S.CartProductCardContainer onPress={handleOnPressCard}>
       <S.Image
+        testID="product-image"
         source={{
           uri: product.image,
         }}
