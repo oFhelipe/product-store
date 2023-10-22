@@ -4,18 +4,18 @@ import {FavoritesProvider} from '../../src/contexts/FavoritesProvider';
 import {CartProvider} from '../../src/contexts/CartProvider';
 import {defaultTheme} from '../../src/styles/themes/default';
 import {RenderOptions, render} from '@testing-library/react-native';
-
-interface renderWithProvidersProps {}
+import {NavigationContainer} from '@react-navigation/native';
 
 export function renderWithProviders(
   component: ReactNode,
-  props?: renderWithProvidersProps,
   renderOptions?: RenderOptions,
 ) {
   return render(
     <ThemeProvider theme={defaultTheme}>
       <FavoritesProvider>
-        <CartProvider>{component}</CartProvider>
+        <CartProvider>
+          <NavigationContainer>{component}</NavigationContainer>
+        </CartProvider>
       </FavoritesProvider>
     </ThemeProvider>,
     renderOptions,
