@@ -70,4 +70,23 @@ describe('Component <ProductCard />', () => {
     expect(icon).toBeOnTheScreen();
     expect(icon.props.style[0].color).toBe(defaultTheme.primary);
   });
+
+  it('should unlike product when click on favorite button twice', async () => {
+    renderWithProviders(<ProductCard product={productInfo} />);
+
+    const button = screen.getByTestId('favorite-button');
+    expect(button).toBeOnTheScreen();
+
+    act(() => {
+      fireEvent.press(button);
+    });
+
+    act(() => {
+      fireEvent.press(button);
+    });
+
+    const icon = screen.getByTestId('favorite-icon');
+    expect(icon).toBeOnTheScreen();
+    expect(icon.props.style[0].color).toBe(defaultTheme.border);
+  });
 });
