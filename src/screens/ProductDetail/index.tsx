@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import * as S from './styles';
-import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
+import {RouteProp, useNavigation} from '@react-navigation/native';
 import {ProductsStackParamList} from '../../routes/ProductsRoutes';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import ProductService from '../../services/ProductService';
@@ -13,12 +13,17 @@ import {useTheme} from 'styled-components/native';
 import {IncrementDecrement} from '../../components/IncrementDecrement';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {CartStackParamList} from '../../routes/CartRoutes';
+import {RefreshControl} from 'react-native';
+import {Loading} from './Loading';
 
-export function ProductDetail() {
+type ScreenProps = {
+  route: RouteProp<ProductsStackParamList, 'ProductDetail'>;
+};
+
+export function ProductDetail({route}: ScreenProps) {
   const navigation =
     useNavigation<NativeStackNavigationProp<CartStackParamList>>();
 
-  const route = useRoute<RouteProp<ProductsStackParamList, 'ProductDetail'>>();
   const {id} = route.params;
 
   const {cartProducts, incrementProduct, decrementProduct, addProduct} =
@@ -26,6 +31,7 @@ export function ProductDetail() {
   const theme = useTheme();
 
   const [product, setProduct] = useState<IProduct | null>(null);
+  const [loading, setLoading] = useState(true);
 
   const cartProductQuantity =
     cartProducts.find(cartProduct => cartProduct.id === product?.id)
@@ -54,15 +60,21 @@ export function ProductDetail() {
     navigation.navigate('Cart');
   }, [handleAddToCart, cartProductQuantity, navigation]);
 
-  useEffect(() => {
-    if (id) {
-      const init = async () => {
-        const response = await ProductService.show(id);
-        setProduct(response);
-      };
-      init();
+  const getProduct = useCallback(async () => {
+    try {
+      setLoading(true);
+      const response = await ProductService.show(id);
+      setProduct(response);
+    } finally {
+      setLoading(false);
     }
   }, [id]);
+
+  useEffect(() => {
+    if (id) {
+      getProduct();
+    }
+  }, [id, getProduct]);
 
   return (
     <S.ProductDetailContainer>
@@ -75,9 +87,12 @@ export function ProductDetail() {
           }
         />
       </S.Header>
-      {product && (
+      {product && !loading ? (
         <>
-          <S.ProductInfoScroll>
+          <S.ProductInfoScroll
+            refreshControl={
+              <RefreshControl refreshing={false} onRefresh={getProduct} />
+            }>
             <S.ProductInfoContainer>
               <S.CategoryRateContainer>
                 <S.Category>{product.category}</S.Category>
@@ -88,6 +103,7 @@ export function ProductDetail() {
               </S.CategoryRateContainer>
               <S.Title>{product.title}</S.Title>
               <S.Image
+                testID="product-image"
                 source={{
                   uri: product.image,
                 }}
@@ -112,12 +128,15 @@ export function ProductDetail() {
               />
             )}
             <Button
+              testID="buy-button"
               onPress={onFinish}
               label={cartProductQuantity > 0 ? 'Finalizar compra' : 'Comprar'}
               size="large"
             />
           </S.ActionsContainer>
         </>
+      ) : (
+        <Loading />
       )}
     </S.ProductDetailContainer>
   );
