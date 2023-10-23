@@ -3,10 +3,12 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useState,
 } from 'react';
 import {IProductInCart} from '../interfaces/IProductInCart';
 import {IProduct} from '../interfaces/IProduct';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface CartContextProps {
   cartProducts: IProductInCart[];
@@ -27,7 +29,7 @@ export function CartProvider({children}: CartProviderProps) {
   const [cartProducts, setCartProducts] = useState<IProductInCart[]>([]);
 
   const addProduct = useCallback(
-    (product: IProduct) => {
+    async (product: IProduct) => {
       const cartProductIndex = cartProducts.findIndex(
         cartProduct => cartProduct.id === product.id,
       );
@@ -41,14 +43,20 @@ export function CartProvider({children}: CartProviderProps) {
           title: product.title,
           quantity: 1,
         };
-        setCartProducts([...cartProducts, productToBeAdded]);
+        const newCartProducts = [...cartProducts, productToBeAdded];
+        setCartProducts(newCartProducts);
+        const stringifiedValue = JSON.stringify(newCartProducts);
+        await AsyncStorage.setItem(
+          '@product_store:cart_products_1.0.0',
+          stringifiedValue,
+        );
       }
     },
     [cartProducts],
   );
 
   const incrementProduct = useCallback(
-    (productId: number) => {
+    async (productId: number) => {
       const cartProductIndex = cartProducts.findIndex(
         cartProduct => cartProduct.id === productId,
       );
@@ -58,35 +66,54 @@ export function CartProvider({children}: CartProviderProps) {
         const newCartProducts = [...cartProducts];
         newCartProducts[cartProductIndex].quantity++;
         setCartProducts(newCartProducts);
-        return;
+        const stringifiedValue = JSON.stringify(newCartProducts);
+        await AsyncStorage.setItem(
+          '@product_store:cart_products_1.0.0',
+          stringifiedValue,
+        );
       }
     },
     [cartProducts],
   );
 
-  const decrementProduct = (productId: number) => {
-    setCartProducts(currentCartProducts => {
-      const cartProductIndex = currentCartProducts.findIndex(
+  const decrementProduct = useCallback(
+    async (productId: number) => {
+      const cartProductIndex = cartProducts.findIndex(
         currentCartProduct => currentCartProduct.id === productId,
       );
 
       const isProductInCart = cartProductIndex >= 0;
 
       if (isProductInCart) {
-        const newCartProducts = [...currentCartProducts];
+        const newCartProducts = [...cartProducts];
 
         if (newCartProducts[cartProductIndex].quantity - 1 > 0) {
           newCartProducts[cartProductIndex].quantity--;
         } else {
           newCartProducts.splice(cartProductIndex, 1);
         }
-
-        return newCartProducts;
+        const stringifiedValue = JSON.stringify(newCartProducts);
+        await AsyncStorage.setItem(
+          '@product_store:cart_products_1.0.0',
+          stringifiedValue,
+        );
+        setCartProducts(newCartProducts);
       }
+    },
+    [cartProducts],
+  );
 
-      return currentCartProducts;
-    });
-  };
+  useEffect(() => {
+    const init = async () => {
+      const value = await AsyncStorage.getItem(
+        '@product_store:cart_products_1.0.0',
+      );
+      if (value !== null) {
+        setCartProducts(JSON.parse(value) as IProductInCart[]);
+      }
+    };
+    init();
+  }, []);
 
   return (
     <CartContext.Provider
