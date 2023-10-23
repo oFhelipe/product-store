@@ -8,6 +8,7 @@ export const ProductsContainer = styled.View`
   flex: 1;
   background-color: ${props => props.theme.background};
   padding: 16px;
+  gap: 8px;
 `;
 
 export const Title = styled.Text`

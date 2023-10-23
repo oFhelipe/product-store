@@ -48,3 +48,5 @@ export const productInfoList: IProduct[] = [
     },
   },
 ];
+
+export const categories = ['category', 'category_2', 'category_3'];
