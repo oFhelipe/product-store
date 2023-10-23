@@ -2,17 +2,16 @@ import React from 'react';
 import {act, fireEvent, screen} from '@testing-library/react-native';
 import {renderWithProviders} from '../../tests/utils/renderWithProviders';
 import {BottomTabRoutes} from './BottomTabRoutes';
+import {serviceGetMock} from '../../tests/mock/services';
 import {api} from '../services/api';
-import {productInfoList} from '../../tests/mock/product';
 
-beforeAll(() => {
-  jest.spyOn(api, 'get').mockResolvedValue({data: productInfoList});
+beforeEach(() => {
+  jest.spyOn(api, 'get').mockImplementation(serviceGetMock);
 });
 
-afterAll(() => {
+afterEach(() => {
   jest.clearAllMocks();
 });
-
 describe(`Route: BottomTabRoutes`, () => {
   it('should render bottom bar', () => {
     renderWithProviders(<BottomTabRoutes />);

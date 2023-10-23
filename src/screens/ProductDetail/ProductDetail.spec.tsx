@@ -1,23 +1,21 @@
 import React from 'react';
 
 import {screen} from '@testing-library/react-native';
-
-import {api} from '../../services/api';
 import {productInfo} from '../../../tests/mock/product';
 import {renderWithProviders} from '../../../tests/utils/renderWithProviders';
 import {formatNumberToCurrency} from '../../utils/formatNumberToCurrency';
 import {ProductDetail} from '.';
+import {serviceGetMock} from '../../../tests/mock/services';
+import {api} from '../../services/api';
 
 const route = {params: {id: 1}, key: '', name: 'ProductDetail'} as const;
-
-beforeEach(() => {
-  jest.spyOn(api, 'get').mockResolvedValue({data: productInfo});
+beforeAll(() => {
+  jest.spyOn(api, 'get').mockImplementation(serviceGetMock);
 });
 
-afterEach(() => {
+afterAll(() => {
   jest.clearAllMocks();
 });
-
 describe('Component <ProductDetail />', () => {
   it('should render with info', async () => {
     renderWithProviders(<ProductDetail route={route} />);

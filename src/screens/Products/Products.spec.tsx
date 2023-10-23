@@ -4,14 +4,13 @@ import React from 'react';
 import {screen} from '@testing-library/react-native';
 import {Products} from '.';
 import {api} from '../../services/api';
-import {productInfoList} from '../../../tests/mock/product';
 import {renderWithProviders} from '../../../tests/utils/renderWithProviders';
-
-beforeEach(() => {
-  jest.spyOn(api, 'get').mockResolvedValue({data: productInfoList});
+import {serviceGetMock} from '../../../tests/mock/services';
+beforeAll(() => {
+  jest.spyOn(api, 'get').mockImplementation(serviceGetMock);
 });
 
-afterEach(() => {
+afterAll(() => {
   jest.clearAllMocks();
 });
 
@@ -25,7 +24,6 @@ describe('Component <Products />', () => {
 
   it('should render two product card', async () => {
     renderWithProviders(<Products />);
-
     const cards = await screen.findAllByTestId('product-card');
     expect(cards.length).toBe(2);
   });
