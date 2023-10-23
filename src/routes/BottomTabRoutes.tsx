@@ -25,6 +25,7 @@ export function BottomTabRoutes() {
       }}>
       <Tab.Screen
         options={{
+          tabBarTestID: 'produtos-tab',
           title: 'Produtos',
           tabBarIcon: ({color, size}) => (
             <AntDesign name="CodeSandbox" color={color} size={size} />
@@ -35,6 +36,7 @@ export function BottomTabRoutes() {
       />
       <Tab.Screen
         options={{
+          tabBarTestID: 'favoritos-tab',
           title: 'Favoritos',
           tabBarIcon: ({color, size}) => (
             <AntDesign name="heart" color={color} size={size} />
@@ -45,6 +47,7 @@ export function BottomTabRoutes() {
       />
       <Tab.Screen
         options={{
+          tabBarTestID: 'carrinho-tab',
           title: 'Carrinho',
           tabBarIcon: ({color, size}) => (
             <Ionicons name="cart" color={color} size={size} />

@@ -13,7 +13,7 @@ export function Cart() {
   );
   return (
     <S.CartContainer>
-      <S.Title>Carrinho</S.Title>
+      <S.Title testID="title">Carrinho</S.Title>
 
       <S.ProductsList
         data={cartProducts}

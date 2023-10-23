@@ -1,6 +1,6 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Products} from '../screens/ProductsList';
+import {Products} from '../screens/Products';
 import {ProductDetail} from '../screens/ProductDetail';
 import {useTheme} from 'styled-components/native';
 
