@@ -5,22 +5,9 @@ import {screen, act, fireEvent} from '@testing-library/react-native';
 
 import {renderWithProviders} from '../../../tests/utils/renderWithProviders';
 import {ProductCard} from '.';
-import {IProduct} from '../../interfaces/IProduct';
 import {formatNumberToCurrency} from '../../utils/formatNumberToCurrency';
 import {defaultTheme} from '../../styles/themes/default';
-
-const productInfo: IProduct = {
-  id: 1,
-  title: 'title',
-  price: 10.5,
-  description: 'A single description',
-  category: 'category',
-  image: 'image_url',
-  rating: {
-    rate: 5,
-    count: 200,
-  },
-};
+import {productInfo} from '../../../tests/mock/product';
 
 describe('Component <ProductCard />', () => {
   it('should render with info', () => {

@@ -30,7 +30,9 @@ export function CartProductCard({product}: CartProductCardProps) {
   }, [product, decrementProduct]);
 
   return (
-    <S.CartProductCardContainer onPress={handleOnPressCard}>
+    <S.CartProductCardContainer
+      testID="product-card"
+      onPress={handleOnPressCard}>
       <S.Image
         testID="product-image"
         source={{

@@ -7,40 +7,35 @@ import {renderWithProviders} from '../../../tests/utils/renderWithProviders';
 import {CartProductCard} from '.';
 import {IProductInCart} from '../../interfaces/IProductInCart';
 import {formatNumberToCurrency} from '../../utils/formatNumberToCurrency';
-
-const productInfo: IProductInCart = {
-  id: 1,
-  title: 'title',
-  price: 10.5,
-  image: 'image_url',
-  quantity: 1,
-};
+import {cartProductInfo} from '../../../tests/mock/product';
 
 describe('Component <CartProductCard />', () => {
   it('should render with info', () => {
-    renderWithProviders(<CartProductCard product={productInfo} />);
+    renderWithProviders(<CartProductCard product={cartProductInfo} />);
 
-    const title = screen.getByText(productInfo.title);
+    const title = screen.getByText(cartProductInfo.title);
     expect(title).toBeOnTheScreen();
 
-    const quantity = screen.getByText(productInfo.quantity.toString());
+    const quantity = screen.getByText(cartProductInfo.quantity.toString());
     expect(quantity).toBeOnTheScreen();
 
-    const price = screen.getByText(formatNumberToCurrency(productInfo.price));
+    const price = screen.getByText(
+      formatNumberToCurrency(cartProductInfo.price),
+    );
     expect(price).toBeOnTheScreen();
   });
 
   it('should render image with correct uri', () => {
-    renderWithProviders(<CartProductCard product={productInfo} />);
+    renderWithProviders(<CartProductCard product={cartProductInfo} />);
 
     const image = screen.getByTestId('product-image');
 
-    expect(image.props.source.uri).toBe(productInfo.image);
+    expect(image.props.source.uri).toBe(cartProductInfo.image);
   });
 
   it('should render calculated total value', () => {
     const productCurrentTestInfo: IProductInCart = {
-      ...productInfo,
+      ...cartProductInfo,
       quantity: 2,
     };
     renderWithProviders(<CartProductCard product={productCurrentTestInfo} />);

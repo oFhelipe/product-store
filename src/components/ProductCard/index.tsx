@@ -32,7 +32,7 @@ export const ProductCard = ({product}: ProductCardProps) => {
   };
 
   return (
-    <S.ProductCardContainer onPress={handleOnPressCard}>
+    <S.ProductCardContainer testID="product-card" onPress={handleOnPressCard}>
       <S.FavoriteButton
         testID="favorite-button"
         onPress={handleOnPressFavorite}>
