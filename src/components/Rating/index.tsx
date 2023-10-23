@@ -1,3 +1,4 @@
+import React from 'react';
 import * as S from './styles';
 import Icon from 'react-native-vector-icons/AntDesign';
 

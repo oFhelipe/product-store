@@ -42,7 +42,7 @@ describe('Service: ProductService', () => {
     });
   });
 
-  describe('Method: show', () => {
+  describe('Method: indexCategories', () => {
     it('should return a list of categories', async () => {
       const categoriesResopnse = await ProductService.indexCategories();
 
