@@ -12,9 +12,9 @@ import {useCart} from '../../contexts/CartProvider';
 import {useTheme} from 'styled-components/native';
 import {IncrementDecrement} from '../../components/IncrementDecrement';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {CartStackParamList} from '../../routes/CartRoutes';
 import {RefreshControl} from 'react-native';
 import {Loading} from './Loading';
+import {BottomTabParamList} from '../../routes/BottomTabRoutes';
 
 type ScreenProps = {
   route: RouteProp<ProductsStackParamList, 'ProductDetail'>;
@@ -22,7 +22,7 @@ type ScreenProps = {
 
 export function ProductDetail({route}: ScreenProps) {
   const navigation =
-    useNavigation<NativeStackNavigationProp<CartStackParamList>>();
+    useNavigation<NativeStackNavigationProp<BottomTabParamList>>();
 
   const {id} = route.params;
 
@@ -57,7 +57,7 @@ export function ProductDetail({route}: ScreenProps) {
     if (cartProductQuantity === 0) {
       handleAddToCart();
     }
-    navigation.navigate('Cart');
+    navigation.navigate('CartTab');
   }, [handleAddToCart, cartProductQuantity, navigation]);
 
   const getProduct = useCallback(async () => {
