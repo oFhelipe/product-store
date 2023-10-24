@@ -60,6 +60,7 @@ export const Products = () => {
             renderItem={({item: category}) => {
               return (
                 <Selection
+                  disabled={loadingProducts}
                   isSelected={selectedCategory === category}
                   label={category}
                   onPress={() => handleSelectCategory(category)}
