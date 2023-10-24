@@ -14,6 +14,12 @@ export const ButtonContainer = styled.TouchableOpacity<ButtonStyleProps>`
   justify-content: center;
   border-radius: 10px;
 
+  ${props =>
+    props.disabled &&
+    css`
+      opacity: 0.7;
+    `}
+
   ${props => {
     if (props.size === 'small') {
       return css`

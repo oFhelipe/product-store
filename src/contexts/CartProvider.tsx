@@ -1,5 +1,4 @@
-import React from 'react';
-import {
+import React, {
   ReactNode,
   createContext,
   useCallback,
@@ -16,6 +15,7 @@ interface CartContextProps {
   addProduct: (product: IProduct) => void;
   incrementProduct: (productId: number) => void;
   decrementProduct: (productId: number) => void;
+  clear: () => Promise<void>;
 }
 
 const CartContext = createContext({} as CartContextProps);
@@ -28,6 +28,11 @@ export const useCart = () => useContext(CartContext);
 
 export function CartProvider({children}: CartProviderProps) {
   const [cartProducts, setCartProducts] = useState<IProductInCart[]>([]);
+
+  const clear = async () => {
+    setCartProducts([]);
+    await AsyncStorage.removeItem('@product_store:cart_products_1.0.0');
+  };
 
   const addProduct = useCallback(
     async (product: IProduct) => {
@@ -123,6 +128,7 @@ export function CartProvider({children}: CartProviderProps) {
         cartProducts,
         decrementProduct,
         incrementProduct,
+        clear,
       }}>
       {children}
     </CartContext.Provider>
