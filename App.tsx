@@ -12,7 +12,7 @@ const SafeAreaViewContainer = styled.SafeAreaView`
 
 export function App() {
   useEffect(() => {
-    SplashScreen.hide();
+    SplashScreen?.hide();
   }, []);
 
   return (
