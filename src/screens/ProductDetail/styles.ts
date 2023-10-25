@@ -38,7 +38,6 @@ export const Image = styled.Image`
   width: ${width * 0.8}px;
   height: ${width * 0.8}px;
   object-fit: contain;
-  align-self: center;
 `;
 
 export const Value = styled.Text`
@@ -60,6 +59,25 @@ export const Description = styled.Text`
 
 export const ProductInfoContainer = styled.View`
   flex: 1;
+`;
+
+export const ImageFavoriteContainer = styled.View`
+  width: 100%;
+  position: relative;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const FavoriteButton = styled.TouchableOpacity`
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  height: 32px;
+  width: 32px;
+  z-index: 2;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const ProductInfoScroll = styled.ScrollView`

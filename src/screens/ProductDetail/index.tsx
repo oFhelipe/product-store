@@ -15,6 +15,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RefreshControl} from 'react-native';
 import {Loading} from './Loading';
 import {BottomTabParamList} from '../../routes/BottomTabRoutes';
+import {useFavorites} from '../../contexts/FavoritesProvider';
 
 type ScreenProps = {
   route: RouteProp<ProductsStackParamList, 'ProductDetail'>;
@@ -28,7 +29,13 @@ export function ProductDetail({route}: ScreenProps) {
 
   const {cartProducts, incrementProduct, decrementProduct, addProduct} =
     useCart();
+
   const theme = useTheme();
+
+  const {ids, favoriteProduct, unFavoriteProduct} = useFavorites();
+  const isFavorite = ids.includes(id);
+  const favoriteIconName = isFavorite ? 'heart' : 'hearto';
+  const iconColor = isFavorite ? theme.primary : theme.border;
 
   const [product, setProduct] = useState<IProduct | null>(null);
   const [loading, setLoading] = useState(true);
@@ -70,6 +77,10 @@ export function ProductDetail({route}: ScreenProps) {
     }
   }, [id]);
 
+  const handleOnPressFavorite = isFavorite
+    ? () => unFavoriteProduct(id)
+    : () => favoriteProduct(id);
+
   useEffect(() => {
     if (id) {
       getProduct();
@@ -102,12 +113,24 @@ export function ProductDetail({route}: ScreenProps) {
                 />
               </S.CategoryRateContainer>
               <S.Title>{product.title}</S.Title>
-              <S.Image
-                testID="product-image"
-                source={{
-                  uri: product.image,
-                }}
-              />
+              <S.ImageFavoriteContainer>
+                <S.FavoriteButton
+                  testID="favorite-button"
+                  onPress={handleOnPressFavorite}>
+                  <AntDesign
+                    testID="favorite-icon"
+                    name={favoriteIconName}
+                    size={24}
+                    color={iconColor}
+                  />
+                </S.FavoriteButton>
+                <S.Image
+                  testID="product-image"
+                  source={{
+                    uri: product.image,
+                  }}
+                />
+              </S.ImageFavoriteContainer>
               <S.Value>{formatNumberToCurrency(product.price)}</S.Value>
               <S.Separator />
               <S.Description>{product.description}</S.Description>
