@@ -1,79 +1,61 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+![Capa](https://github.com/oFhelipe/product-store/assets/59922096/926b8d1e-6400-405d-947f-a8aa3294211b)
+## 🔍 Sobre o Projeto
+O ProductStore é um projeto de um aplicativo de compras simples que demonstra a integração com a API FakeStore (https://fakestoreapi.com). Este aplicativo oferece aos usuários a capacidade de navegar por uma variedade de produtos fictícios, adicioná-los ao carrinho, marcá-los como favoritos e listar produtos em várias categorias.
 
-# Getting Started
 
-> **Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
 
-## Step 1: Start the Metro Server
+Um projeto que visa proporcionar uma experiência de compra virtual simples e eficaz. Este projeto demonstra como criar um aplicativo de compras básico com funcionalidades essenciais. Ele pode servir como um ponto de partida para o desenvolvimento de aplicativos de comércio eletrônico mais complexos e personalizados.
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
 
-To start Metro, run the following command from the _root_ of your React Native project:
+## 📚 Funcionalidades
+
+- Catálogo de Produtos
+- Detalhes do Produto
+- Adicionar ao Carrinho
+- Favoritos
+- Listagem de Produtos por Categoria
+- Carrinho de Compras
+
+##  🚀 Tecnologias
+Esse projeto foi desenvolvido com as seguintes tecnologias:
+
+- Figma
+- React-Native
+- React Navigation
+- Typescript
+- Styled-components
+- Axios
+- Jest
+- Testing Libray
+- Husky
+- Commitizen
+- Commit Lint
+
+## Design
+
+Acesse o design do projeto no figma por [aqui](https://www.figma.com/file/2jsNOcxiq5K0V1WdNI1p4L/Product-store?type=design&node-id=0%3A1&mode=design&t=wYsPkJ6QVR9KsBHW-1)
+
+## Demonstração
+
+![gif](https://github.com/oFhelipe/product-store/assets/59922096/f1aa1e12-390d-4a1a-bfcc-1408afc6cd53)
+
+## ⚙️ Instalação
 
 ```bash
-# using npm
-npm start
+# Clone este repositório
+$ git clone https://github.com/oFhelipe/product-store
 
-# OR using Yarn
-yarn start
+# Entre na pasta
+$ cd product-store
+
+# Instale as dependências
+$ yarn
+# ou
+$ npm install
+
+# Para iniciar o projeto no android
+$ yarn android
+# ou
+$ npm run android
+
 ```
-
-## Step 2: Start your Application
-
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
-
-### For Android
-
-```bash
-# using npm
-npm run android
-
-# OR using Yarn
-yarn android
-```
-
-### For iOS
-
-```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
-
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
-
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
