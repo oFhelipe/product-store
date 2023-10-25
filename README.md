@@ -14,8 +14,6 @@ Um projeto que visa proporcionar uma experiência de compra virtual simples e ef
 - Adicionar ao Carrinho
 - Favoritos
 - Listagem de Produtos por Categoria
-- Pesquisa Avançada
-- Avaliações e Classificações
 - Carrinho de Compras
 
 ##  🚀 Tecnologias
