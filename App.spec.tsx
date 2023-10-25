@@ -40,4 +40,25 @@ describe('Component <App />', () => {
     );
     expect(total).toBeOnTheScreen();
   });
+
+  it('should favorite an item', async () => {
+    render(<App />);
+    const products = await screen.findAllByTestId('product-card');
+    act(() => {
+      fireEvent.press(products[0]);
+    });
+    const favoriteButton = await screen.findByTestId('favorite-button');
+    act(() => {
+      fireEvent.press(favoriteButton);
+    });
+
+    const favoriteTab = await screen.findByTestId('favoritos-tab');
+    act(() => {
+      fireEvent.press(favoriteTab);
+    });
+
+    const favoriteProduts = await screen.findAllByTestId('product-card');
+    console.log(favoriteProduts);
+    expect(favoriteProduts.length).toBe(1);
+  });
 });
