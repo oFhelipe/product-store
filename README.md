@@ -1,7 +1,5 @@
 ![Capa](https://github.com/oFhelipe/product-store/assets/59922096/926b8d1e-6400-405d-947f-a8aa3294211b)
-# Título do Projeto
-
-Sobre o Projeto
+## 🔍 Sobre o Projeto
 O ProductStore é um projeto de um aplicativo de compras simples que demonstra a integração com a API FakeStore (https://fakestoreapi.com). Este aplicativo oferece aos usuários a capacidade de navegar por uma variedade de produtos fictícios, adicioná-los ao carrinho, marcá-los como favoritos e listar produtos em várias categorias.
 
 
@@ -9,7 +7,7 @@ O ProductStore é um projeto de um aplicativo de compras simples que demonstra a
 Um projeto que visa proporcionar uma experiência de compra virtual simples e eficaz. Este projeto demonstra como criar um aplicativo de compras básico com funcionalidades essenciais. Ele pode servir como um ponto de partida para o desenvolvimento de aplicativos de comércio eletrônico mais complexos e personalizados.
 
 
-## Funcionalidades
+## 📚 Funcionalidades
 
 - Catálogo de Produtos
 - Detalhes do Produto
@@ -19,10 +17,11 @@ Um projeto que visa proporcionar uma experiência de compra virtual simples e ef
 - Pesquisa Avançada
 - Avaliações e Classificações
 - Carrinho de Compras
-#  🚀 Tecnologias
+
+##  🚀 Tecnologias
 Esse projeto foi desenvolvido com as seguintes tecnologias:
 
-
+- Figma
 - React-Native
 - React Navigation
 - Typescript
@@ -33,11 +32,16 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - Husky
 - Commitizen
 - Commit Lint
+
+## Design
+
+Acesse o design do projeto no figma por [aqui](https://www.figma.com/file/2jsNOcxiq5K0V1WdNI1p4L/Product-store?type=design&node-id=0%3A1&mode=design&t=wYsPkJ6QVR9KsBHW-1)
+
 ## Demonstração
 
 ![gif](https://github.com/oFhelipe/product-store/assets/59922096/f1aa1e12-390d-4a1a-bfcc-1408afc6cd53)
 
-## Instalação
+## ⚙️ Instalação
 
 ```bash
 # Clone este repositório
