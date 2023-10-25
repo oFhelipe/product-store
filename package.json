@@ -15,7 +15,9 @@
     "test": "jest",
     "prepare": "husky install",
     "commitlint": "commitlint",
-    "commit": "cz"
+    "commit": "cz",
+    "android:apk": "cd android && ./gradlew clean && ./gradlew assembleRelease && cd ..",
+    "android:aab": "cd android && ./gradlew clean && ./gradlew bundleRelease && cd .."
   },
   "dependencies": {
     "@commitlint/cli": "^18.0.0",
